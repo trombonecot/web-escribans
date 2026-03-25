@@ -1,0 +1,67 @@
+---
+import { useTranslations } from '../i18n/utils';
+import { getDetailRoute } from '../i18n/routes';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  title: string;
+  slug: string;
+  image: string;
+  lang: Lang;
+}
+
+const { title, slug, image, lang } = Astro.props;
+const t = useTranslations(lang);
+const href = getDetailRoute('games', slug, lang);
+---
+
+<article class="book-card">
+  <a href={href} class="book-card__link">
+    <img src={image} alt={title} class="book-card__image" loading="lazy" />
+    <div class="book-card__title-box">
+      <h3 class="book-card__title">{title}</h3>
+    </div>
+  </a>
+</article>
+
+<style>
+  .book-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .book-card__link {
+    text-decoration: none;
+    color: var(--color-text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .book-card__image {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+
+  .book-card__title-box {
+    background-color: #000;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    max-width: 220px;
+  }
+
+  .book-card__title {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    color: var(--color-bg);
+    margin-bottom: 0;
+  }
+
+  .book-card__link:hover .book-card__title-box {
+    background-color: #333;
+  }
+</style>

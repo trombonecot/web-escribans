@@ -1,0 +1,45 @@
+---
+const socials = [
+  { name: 'Twitter', href: 'https://twitter.com/hipogeu', icon: 'twitter' },
+  { name: 'Bluesky', href: 'https://bsky.app/profile/escrivanshipogeu.bsky.social', icon: 'bluesky' },
+];
+---
+
+<div class="social-links">
+  {socials.map((s) => (
+    <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.name} class="social-link">
+      {s.icon === 'twitter' && (
+        <svg class="social-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
+      )}
+      {s.icon === 'bluesky' && (
+        <svg class="social-icon" width="24" height="24" viewBox="0 0 568 501" fill="currentColor">
+          <path d="M123.121 33.6637C188.241 82.5526 258.281 181.681 284 234.873C309.719 181.681 379.759 82.5526 444.879 33.6637C491.866 -1.61183 568 -28.9064 568 57.9464C568 75.2916 558.055 189.086 552.06 210.685C534.546 274.687 468.18 289.601 410.023 278.306C513.28 296.906 543.014 356.887 497.46 416.868C391.31 553.553 312.554 419.963 287.975 350.616C286.075 345.571 284.144 340.513 284 340.513C283.856 340.513 281.925 345.571 280.025 350.616C255.446 419.963 176.69 553.553 70.5403 416.868C24.9863 356.887 54.7204 296.906 157.977 278.306C99.8197 289.601 33.4535 274.687 15.9396 210.685C9.94525 189.086 0 75.2916 0 57.9464C0 -28.9064 76.1337 -1.61183 123.121 33.6637Z" />
+        </svg>
+      )}
+    </a>
+  ))}
+</div>
+
+<style>
+  .social-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .social-link {
+    color: var(--color-text);
+    transition: color 0.2s;
+  }
+
+  .social-link:hover {
+    color: var(--color-primary);
+  }
+
+  .social-icon {
+    display: block;
+  }
+</style>

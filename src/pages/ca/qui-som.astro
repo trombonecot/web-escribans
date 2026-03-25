@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+const teamMembers = (await getCollection('team', ({ data }) => data.lang === 'ca'))
+  .sort((a, b) => a.data.order - b.data.order);
+
+const rendered = await Promise.all(
+  teamMembers.map(async (member) => {
+    const { Content } = await render(member);
+    return { member, Content };
+  })
+);
+---
+
+<BaseLayout title="Qui som">
+  <div class="about-page">
+    <h1 class="about-title">Qui som</h1>
+    <p class="about-intro">Els escrivans de l'hipogeu està format per:</p>
+    <div class="team-columns">
+      {rendered.map(({ member, Content }) => (
+        <article class="team-column">
+          <div class="team-column__photo-wrap">
+            <img src={member.data.image} alt={member.data.name} class="team-column__photo" loading="lazy" />
+          </div>
+          <p class="team-column__name"><strong>{member.data.name}</strong></p>
+          <div class="team-column__bio">
+            <Content />
+          </div>
+        </article>
+      ))}
+    </div>
+    <p class="about-footnote"><em>* Il·lustracions de Toni Ruiz.</em></p>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-page {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .about-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: 1.25rem;
+    line-height: 1.2;
+  }
+
+  .about-intro {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .team-columns {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .team-column {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .team-column__photo-wrap {
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .team-column__photo {
+    width: auto;
+    height: 200px;
+    display: inline-block;
+  }
+
+  .team-column__name {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+  }
+
+  .team-column__bio {
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  .team-column__bio :global(p) {
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+  }
+
+  .about-footnote {
+    margin-top: 2rem;
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .team-columns {
+      flex-direction: column;
+    }
+  }
+</style>

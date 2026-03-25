@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout>
+  <section class="home-content">
+    <div class="home-col-left">
+      <p>
+        Els Escrivans de l'Hipogeu som un grup creatiu d'escriptura i disseny de jocs
+        de rol que neix de la passió pel joc i la narrativa d'en Roman Aixendri, en
+        Marc Martínez Dalmases i l'Eduard Cot. Amb l'objectiu d'unir esforços i
+        aixecar projectes més ambiciosos hem decidit unir-nos per iniciar un camí
+        plegats com a grup creatiu. Es tracta d'una iniciativa pensada per poder
+        abastar projectes més grans del que un sol podria i de muntar una xarxa de
+        suport complementari tant en la part creativa, de revisió o en el camí de la
+        publicació dels projectes individuals o col·lectius de cadascun dels autors.
+      </p>
+    </div>
+    <div class="home-col-right">
+      <p>
+        Sobre la taula tenim algun projecte en camí, algun en procés i moltes idees
+        en un cabàs que de mica en mica aniran veient la llum del dia.
+      </p>
+      <p>
+        Si tens un encàrrec, ganes de col·laborar, idees o simplement ganes de
+        xerrar, ens trobaràs a
+        <a href="mailto:escrivans@hipogeu.org">escrivans@hipogeu.org</a>.
+      </p>
+      <img src="/images/logo.png" alt="Escrivans de l'hipogeu" class="home-logo" />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .home-content {
+    display: flex;
+    gap: 3rem;
+    padding: 2.5rem 0;
+  }
+
+  .home-col-left {
+    flex: 1;
+  }
+
+  .home-col-right {
+    flex: 1;
+  }
+
+  .home-logo {
+    max-width: 250px;
+    margin: 2rem auto 0;
+    display: block;
+  }
+
+  .home-content a {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    .home-content {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }
+</style>

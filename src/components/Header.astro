@@ -1,0 +1,189 @@
+---
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { useTranslations } from '../i18n/utils';
+import { getRoute } from '../i18n/routes';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const navItems = [
+  { label: t('nav.about'), href: getRoute('about', lang) },
+  { label: t('nav.news'), href: getRoute('news', lang) },
+  { label: t('nav.games'), href: getRoute('games', lang) },
+  { label: t('nav.contact'), href: getRoute('contact', lang) },
+];
+---
+
+<header class="site-header">
+  <div class="header-brand">
+    <a href={`/${lang}/`} class="header-title">
+      <h1 class="header-title__text">{t('site.title')}</h1>
+    </a>
+    <p class="header-tagline">{t('site.tagline')}</p>
+  </div>
+</header>
+
+<nav class="site-nav" aria-label="Menú principal">
+  <div class="nav-inner">
+    <button class="nav-toggle" aria-label="Obre menú" aria-expanded="false">
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+    <div class="nav-content">
+      <ul class="nav-list">
+        {navItems.map((item) => (
+          <li>
+            <a href={item.href} class:list={['nav-link', { active: Astro.url.pathname.startsWith(item.href) }]}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <LanguageSwitcher lang={lang} />
+    </div>
+  </div>
+</nav>
+
+<style>
+  .site-header {
+    padding: 1.5rem 0 0.5rem;
+    text-align: center;
+  }
+
+  .header-brand {
+    text-align: center;
+  }
+
+  .header-title {
+    text-decoration: none;
+    color: var(--color-text);
+  }
+
+  .header-title:hover {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .header-title__text {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .header-tagline {
+    font-size: 1.125rem;
+    color: var(--color-text);
+    margin: 0.625rem 0 0;
+    font-family: var(--font-body);
+  }
+
+  /* Navigation bar */
+  .site-nav {
+    background-color: #000;
+    padding: 1.25rem 2.5rem;
+    margin-top: 1rem;
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .nav-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .nav-list {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    justify-content: center;
+  }
+
+  .nav-link {
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: var(--color-bg);
+    text-decoration: none;
+    font-family: var(--font-body);
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .nav-toggle__bar {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-bg);
+    transition: transform 0.3s;
+  }
+
+  @media (max-width: 768px) {
+    .site-nav {
+      padding: 1rem 1.5rem;
+    }
+
+    .nav-toggle {
+      display: flex;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    .nav-content {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      padding-top: 1rem;
+    }
+
+    .nav-content.open {
+      display: flex;
+    }
+
+    .nav-list {
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: center;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector('.nav-toggle');
+  const nav = document.querySelector('.nav-content');
+  toggle?.addEventListener('click', () => {
+    const expanded = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!expanded));
+    nav?.classList.toggle('open');
+  });
+</script>

@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BookCard from '../../../components/BookCard.astro';
+import { getCollection } from 'astro:content';
+import { useTranslations, getLangFromUrl } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const allBooks = (await getCollection('books', ({ data }) => data.lang === 'es'))
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+
+const featured = allBooks.filter((b) => b.data.tags.includes('featured'));
+const jocs = allBooks.filter((b) => b.data.category.includes('jocs'));
+const solitari = allBooks.filter((b) => b.data.category.includes('solitari'));
+const aventures = allBooks.filter((b) => b.data.category.includes('aventures'));
+---
+
+<BaseLayout title={t('nav.games')}>
+  <h2 class="page-title">{t('nav.games')}</h2>
+  <p class="games-intro">{t('games.intro')}</p>
+
+  {featured.length > 0 && (
+    <section class="games-section">
+      <h3 class="games-section__title">{t('games.featured')}</h3>
+      <div class="games-grid">
+        {featured.map((book) => (
+          <BookCard title={book.data.title} slug={book.data.urlSlug} image={book.data.image} lang="es" />
+        ))}
+      </div>
+    </section>
+  )}
+
+  {jocs.length > 0 && (
+    <section class="games-section">
+      <h3 class="games-section__title">{t('games.games')}</h3>
+      <div class="games-grid">
+        {jocs.map((book) => (
+          <BookCard title={book.data.title} slug={book.data.urlSlug} image={book.data.image} lang="es" />
+        ))}
+      </div>
+    </section>
+  )}
+
+  {solitari.length > 0 && (
+    <section class="games-section">
+      <h3 class="games-section__title">{t('games.solo')}</h3>
+      <div class="games-grid">
+        {solitari.map((book) => (
+          <BookCard title={book.data.title} slug={book.data.urlSlug} image={book.data.image} lang="es" />
+        ))}
+      </div>
+    </section>
+  )}
+
+  {aventures.length > 0 && (
+    <section class="games-section">
+      <h3 class="games-section__title">{t('games.adventures')}</h3>
+      <div class="games-grid">
+        {aventures.map((book) => (
+          <BookCard title={book.data.title} slug={book.data.urlSlug} image={book.data.image} lang="es" />
+        ))}
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .games-intro {
+    margin-bottom: 2rem;
+  }
+
+  .games-section {
+    margin-bottom: 3rem;
+  }
+
+  .games-section__title {
+    background-color: #000;
+    color: var(--color-bg);
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .games-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .games-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+</style>

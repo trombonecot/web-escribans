@@ -1,0 +1,110 @@
+---
+import SocialLinks from './SocialLinks.astro';
+import { useTranslations } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <p class="footer-copyright">{t('footer.copyright')} {year}</p>
+      <SocialLinks />
+    </div>
+    <div class="footer-right">
+      <p class="footer-contact">
+        {t('contact.intro')}
+        <a href="mailto:escrivans@hipogeu.org">escrivans@hipogeu.org</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: #000;
+    color: var(--color-bg);
+    padding: 2.5rem 2.5rem;
+    margin-top: 3rem;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer-right {
+    text-align: right;
+  }
+
+  .footer-copyright {
+    font-size: 1.5rem;
+    font-family: var(--font-heading);
+    color: var(--color-bg);
+    margin-bottom: 0;
+  }
+
+  .footer-contact {
+    color: var(--color-bg);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-contact a {
+    color: var(--color-bg);
+    text-decoration: none;
+  }
+
+  .footer-contact a:hover {
+    color: #fff;
+  }
+
+  .footer-credit {
+    font-size: 0.85rem;
+    color: rgba(254, 232, 115, 0.7);
+    margin-bottom: 0;
+  }
+
+  .site-footer :global(.social-links) {
+    justify-content: flex-start;
+  }
+
+  .site-footer :global(.social-links a) {
+    color: var(--color-bg);
+  }
+
+  .site-footer :global(.social-links a:hover) {
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .footer-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .footer-right {
+      text-align: center;
+    }
+
+    .site-footer :global(.social-links) {
+      justify-content: center;
+    }
+  }
+</style>

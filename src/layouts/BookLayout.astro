@@ -1,0 +1,82 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { useTranslations, formatDate } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  title: string;
+  author: string;
+  publishDate: Date;
+  image: string;
+  downloadUrl?: string;
+  downloadLabel?: string;
+  buyUrl?: string;
+  lang: Lang;
+}
+
+const { title, author, publishDate, image, downloadUrl, downloadLabel, buyUrl, lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<BaseLayout title={title} image={image}>
+  <article class="book-detail">
+    <header class="book-detail__header">
+      <h1>{title}</h1>
+      <p class="book-detail__meta">
+        <span>{t('book.author')}: <strong>{author}</strong></span>
+        <span>{t('book.date')}: {formatDate(publishDate, lang)}</span>
+      </p>
+    </header>
+
+    <img src={image} alt={title} class="book-detail__cover" />
+
+    <div class="book-detail__content">
+      <slot />
+    </div>
+
+    <div class="book-detail__actions">
+      {downloadUrl && (
+        <a href={downloadUrl} target="_blank" rel="noopener noreferrer" class="btn">
+          {downloadLabel || t('book.download')}
+        </a>
+      )}
+      {buyUrl && (
+        <a href={buyUrl} target="_blank" rel="noopener noreferrer" class="btn">
+          {t('book.buy')}
+        </a>
+      )}
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .book-detail__header {
+    margin-bottom: 2rem;
+  }
+
+  .book-detail__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+  }
+
+  .book-detail__cover {
+    max-width: 400px;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+  }
+
+  .book-detail__content {
+    margin-bottom: 2rem;
+  }
+
+  .book-detail__actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+</style>

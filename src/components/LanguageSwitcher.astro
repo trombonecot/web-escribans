@@ -1,0 +1,73 @@
+---
+import { languages, type Lang } from '../i18n/ui';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { translatePath } from '../i18n/routes';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const currentPath = Astro.url.pathname;
+const alternateLang: Lang = lang === 'ca' ? 'es' : 'ca';
+const alternatePath = translatePath(currentPath, lang, alternateLang);
+---
+
+<div class="lang-switcher">
+  <span class="lang-switcher__label">{t('nav.language')}:</span>
+  {Object.entries(languages).map(([code, _label], index) => {
+    const isCurrent = code === lang;
+    return (
+      <>
+        {index > 0 && <span class="lang-switcher__sep">/</span>}
+        {isCurrent ? (
+          <span class="lang-switcher__item lang-switcher__item--active">{code}</span>
+        ) : (
+          <a href={alternatePath} class="lang-switcher__item">{code}</a>
+        )}
+      </>
+    );
+  })}
+</div>
+
+<style>
+  .lang-switcher {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 1rem;
+    position: absolute;
+    right: 0;
+  }
+
+  .lang-switcher__label {
+    color: var(--color-bg);
+  }
+
+  .lang-switcher__sep {
+    color: var(--color-bg);
+  }
+
+  .lang-switcher__item {
+    color: var(--color-bg);
+    text-decoration: none;
+  }
+
+  .lang-switcher__item:hover {
+    text-decoration: none;
+    color: #fff;
+  }
+
+  .lang-switcher__item--active {
+    font-weight: 700;
+    color: var(--color-bg);
+  }
+
+  @media (max-width: 768px) {
+    .lang-switcher {
+      position: static;
+      justify-content: center;
+    }
+  }
+</style>

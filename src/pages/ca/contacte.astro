@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { useTranslations, getLangFromUrl } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<BaseLayout title={t('nav.contact')}>
+  <h2 class="page-title">{t('nav.contact')}</h2>
+  <p>
+    {t('contact.intro')}
+    <a href="mailto:escrivans@hipogeu.org">escrivans@hipogeu.org</a>.
+  </p>
+</BaseLayout>

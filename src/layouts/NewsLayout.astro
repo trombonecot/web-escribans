@@ -1,0 +1,54 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { formatDate } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  title: string;
+  publishDate: Date;
+  image: string;
+  author: string;
+  lang: Lang;
+}
+
+const { title, publishDate, image, author, lang } = Astro.props;
+---
+
+<BaseLayout title={title} image={image}>
+  <article class="news-article">
+    <header class="news-article__header">
+      <h1>{title}</h1>
+      <p class="news-article__meta">
+        {author} &middot; {formatDate(publishDate, lang)}
+      </p>
+    </header>
+
+    {image && <img src={image} alt={title} class="news-article__image" />}
+
+    <div class="news-article__content">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .news-article__header {
+    margin-bottom: 2rem;
+  }
+
+  .news-article__meta {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+  }
+
+  .news-article__image {
+    max-width: 100%;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+  }
+
+  .news-article__content {
+    margin-bottom: 2rem;
+  }
+</style>

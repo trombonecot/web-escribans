@@ -1,0 +1,52 @@
+---
+import { getDetailRoute } from '../i18n/routes';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  title: string;
+  slug: string;
+  image: string;
+  lang: Lang;
+}
+
+const { title, slug, image, lang } = Astro.props;
+const href = getDetailRoute('news', slug, lang);
+---
+
+<article class="news-card">
+  <a href={href} class="news-card__link">
+    <img src={image} alt={title} class="news-card__image" loading="lazy" />
+    <h3 class="news-card__title">{title}</h3>
+  </a>
+</article>
+
+<style>
+  .news-card {
+    margin-bottom: 2rem;
+  }
+
+  .news-card__link {
+    text-decoration: none;
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .news-card__link:hover .news-card__title {
+    color: var(--color-primary);
+  }
+
+  .news-card__image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .news-card__title {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+  }
+</style>
