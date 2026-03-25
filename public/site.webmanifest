@@ -1,0 +1,16 @@
+{
+  "name": "Escrivans de l'Hipogeu",
+  "short_name": "Hipogeu",
+  "description": "Grup creatiu d'escriptura i disseny de jocs de rol",
+  "start_url": "/ca/",
+  "display": "standalone",
+  "background_color": "#fee873",
+  "theme_color": "#fee873",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

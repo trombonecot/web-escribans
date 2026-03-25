@@ -22,6 +22,24 @@ const {
 } = Astro.props;
 
 const pageTitle = title === t('site.title') ? title : `${title} — ${t('site.title')}`;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href;
+const currentLangUrl = canonicalUrl;
+const alternateLangUrl = new URL(alternate.path, Astro.site).href;
+const caUrl = lang === 'ca' ? currentLangUrl : alternateLangUrl;
+const esUrl = lang === 'es' ? currentLangUrl : alternateLangUrl;
+
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Escrivans de l'Hipogeu",
+  "url": "https://hipogeu.org",
+  "logo": "https://hipogeu.org/images/logo.png",
+  "email": "escrivans@hipogeu.org",
+  "sameAs": [
+    "https://twitter.com/hipogeu",
+    "https://bsky.app/profile/escrivanshipogeu.bsky.social"
+  ]
+};
 ---
 
 <!doctype html>
@@ -29,23 +47,43 @@ const pageTitle = title === t('site.title') ? title : `${title} — ${t('site.ti
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#fee873" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
 
-    <!-- Alternate language -->
-    <link rel="alternate" hreflang={alternate.lang} href={`${Astro.site}${alternate.path.slice(1)}`} />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
+    <!-- Hreflang: self + alternate + x-default -->
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="ca" href={caUrl} />
+    <link rel="alternate" hreflang="es" href={esUrl} />
+    <link rel="alternate" hreflang="x-default" href={caUrl} />
 
     <!-- Open Graph -->
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site).href} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content={t('site.title')} />
+    <meta property="og:locale" content={lang === 'ca' ? 'ca_ES' : 'es_ES'} />
+    <meta property="og:locale:alternate" content={lang === 'ca' ? 'es_ES' : 'ca_ES'} />
     {image && <meta property="og:image" content={new URL(image, Astro.site).href} />}
 
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    {image && <meta name="twitter:image" content={new URL(image, Astro.site).href} />}
+
     <!-- Favicon -->
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Font preloads -->
+    <link rel="preload" href="/fonts/dm-serif-display-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/source-sans-pro-400.woff2" as="font" type="font/woff2" crossorigin />
+
+    <!-- Organization JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
   </head>
   <body>
     <a class="skip-link" href="#main">Salta al contingut</a>

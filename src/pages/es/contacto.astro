@@ -6,7 +6,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<BaseLayout title={t('nav.contact')}>
+<BaseLayout title={t('nav.contact')} description="Contacta con los Escrivans de l'Hipogeu para encargos, colaboraciones o cualquier consulta.">
   <h2 class="page-title">{t('nav.contact')}</h2>
   <p>
     {t('contact.intro')}

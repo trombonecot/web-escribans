@@ -12,9 +12,24 @@ interface Props {
 }
 
 const { title, publishDate, image, author, lang } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "author": { "@type": "Person", "name": author },
+  "datePublished": publishDate.toISOString().split('T')[0],
+  "image": image ? new URL(image, Astro.site).href : undefined,
+  "inLanguage": lang,
+  "publisher": {
+    "@type": "Organization",
+    "name": "Escrivans de l'Hipogeu",
+  }
+};
 ---
 
-<BaseLayout title={title} image={image}>
+<BaseLayout title={title} image={image} description={`${title} — ${author}`}>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   <article class="news-article">
     <div class="news-article__top">
       <div class="news-article__info">

@@ -16,9 +16,20 @@ interface Props {
 
 const { title, author, publishDate, image, downloadUrl, downloadLabel, buyUrl, lang } = Astro.props;
 const t = useTranslations(lang);
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": title,
+  "author": { "@type": "Person", "name": author },
+  "datePublished": publishDate.toISOString().split('T')[0],
+  "image": new URL(image, Astro.site).href,
+  "inLanguage": lang,
+};
 ---
 
-<BaseLayout title={title} image={image}>
+<BaseLayout title={title} image={image} description={`${title} — ${author}. ${t('site.title')}`}>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   <article class="book-detail">
     <div class="book-detail__top">
       <div class="book-detail__info">
