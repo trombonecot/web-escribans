@@ -6,7 +6,7 @@ publishDate: 2026-02-21
 image: "/images/books/naufragi.png"
 category: ["jocs", "solitari"]
 tags: ["featured"]
-downloadUrl: "https://ko-fi.com/s/naufragi"
+downloadUrl: "https://ko-fi.com/s/c855e657f1"
 downloadLabel: "Compra"
 lang: "es"
 translationSlug: "naufragi"

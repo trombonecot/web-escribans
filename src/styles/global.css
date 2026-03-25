@@ -31,6 +31,7 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: #000;
 }
 
 body {
@@ -95,6 +96,11 @@ img {
   padding: 0 var(--site-padding);
 }
 
+.site-main {
+  padding-top: 2.5rem;
+  min-height: 400px;
+}
+
 .skip-link {
   position: absolute;
   left: -9999px;
@@ -115,8 +121,8 @@ img {
 .btn {
   display: inline-block;
   padding: 0.65rem 1.75rem;
-  background-color: var(--color-primary);
-  color: #fff;
+  background-color: #000;
+  color: var(--color-bg);
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 700;
@@ -127,8 +133,8 @@ img {
 }
 
 .btn:hover {
-  background-color: var(--color-primary-hover);
-  color: #fff;
+  background-color: #333;
+  color: var(--color-bg);
   text-decoration: none;
 }
 
@@ -173,10 +179,27 @@ img {
    =========================== */
 @media (max-width: 768px) {
   :root {
-    --site-padding: 1rem;
+    --site-padding: 1.25rem;
   }
 
   body {
     font-size: 1rem;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.35rem;
+  }
+
+  .site-main {
+    padding-top: 1.5rem;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
   }
 }

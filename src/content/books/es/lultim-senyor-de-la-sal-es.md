@@ -5,7 +5,7 @@ author: "Eduard Cot"
 publishDate: 2023-10-19
 image: "/images/books/senyor-sal.png"
 category: ["aventures"]
-tags: ["featured"]
+tags: []
 downloadUrl: "https://eduardcot.itch.io/senordelasal"
 downloadLabel: "Descarga"
 lang: "es"

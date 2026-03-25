@@ -16,39 +16,66 @@ const { title, publishDate, image, author, lang } = Astro.props;
 
 <BaseLayout title={title} image={image}>
   <article class="news-article">
-    <header class="news-article__header">
-      <h1>{title}</h1>
-      <p class="news-article__meta">
-        {author} &middot; {formatDate(publishDate, lang)}
-      </p>
-    </header>
+    <div class="news-article__top">
+      <div class="news-article__info">
+        <header class="news-article__header">
+          <h1>{title}</h1>
+          <p class="news-article__meta">
+            {author} &middot; {formatDate(publishDate, lang)}
+          </p>
+        </header>
 
-    {image && <img src={image} alt={title} class="news-article__image" />}
+        <div class="news-article__content">
+          <slot />
+        </div>
+      </div>
 
-    <div class="news-article__content">
-      <slot />
+      {image && <img src={image} alt={title} class="news-article__image" />}
     </div>
   </article>
 </BaseLayout>
 
 <style>
+  .news-article__top {
+    display: flex;
+    gap: 2.5rem;
+    align-items: flex-start;
+  }
+
+  .news-article__info {
+    flex: 1;
+    min-width: 0;
+  }
+
   .news-article__header {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
 
   .news-article__meta {
-    color: var(--color-text-secondary);
+    color: var(--color-text);
+    font-style: italic;
     font-size: 0.95rem;
     margin-top: 0.5rem;
   }
 
   .news-article__image {
-    max-width: 100%;
+    width: 280px;
+    flex-shrink: 0;
     border-radius: 4px;
-    margin-bottom: 2rem;
   }
 
   .news-article__content {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .news-article__top {
+      flex-direction: column;
+    }
+
+    .news-article__image {
+      width: 100%;
+      max-width: 400px;
+    }
   }
 </style>
