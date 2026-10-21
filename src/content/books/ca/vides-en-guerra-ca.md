@@ -5,7 +5,7 @@ author: "Marc Martínez Dalmases"
 publishDate: 2023-04-23
 image: "/images/books/vides-guerra.png"
 category: ["jocs"]
-tags: ["featured"]
+tags: []
 downloadUrl: "https://marc-martinez.itch.io/vides-en-guerra"
 downloadLabel: "Descarrega"
 lang: "ca"

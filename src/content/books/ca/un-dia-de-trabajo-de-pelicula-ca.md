@@ -5,7 +5,7 @@ author: "Roman Aixendri"
 publishDate: 2025-11-02
 image: "/images/books/pelicules.png"
 category: ["solitari"]
-tags: ["featured"]
+tags: []
 downloadUrl: "https://roman-aixendri.itch.io/un-dia-de-trabajo-de-pelicula"
 buyUrl: "https://www.amazon.es/día-trabajo-película-Juego-solitario/dp/B0FP8JMCWQ"
 lang: "ca"
