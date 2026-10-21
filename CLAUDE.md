@@ -113,7 +113,7 @@ public/
 - Create both `ca/` and `es/` Markdown files with matching `translationSlug`
 - Books need a cover image in `public/images/books/`
 - Use existing frontmatter schemas as reference — see `src/content.config.ts`
-- Add `tags: ["featured"]` to show a book on the homepage featured section
+- Add `tags: ["featured"]` to show a book in the "Destacats" section at the top of the games page (`/ca/jocs/`, `/es/juegos/`)
 - Pass unique `description` prop to BaseLayout on any new page
 
 ## When Adding New Pages

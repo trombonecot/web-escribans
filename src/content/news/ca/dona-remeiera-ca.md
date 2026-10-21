@@ -12,6 +12,8 @@ En Basidiomicot i l'Eduard Cot són dos dels sis autors del nou suplement d'aven
 
 En Basidiomicot hi aporta l'aventura *El judici de Margarida de Cervera* i l'Eduard Cot, l'anomenada *Llet del diable*.
 
+El podeu comprar a la botiga de Mel Negra: [Dona remeiera, bruixa a la foguera!](https://ko-fi.com/s/56875d2548)
+
 ## Llet del diable
 
 Us deixem cinc cèntims de l'aventura: a la vila de Besalú els infortunis s'acumulen en aquest estiu sec i calorós. El menjar escasseja, les collites van malament i les bronques entre companyies de mercenaris se succeeixen sense fi. En Dídac, un amic, us ha convocat perquè tota aquesta mala maror ha recaigut sobre la seva mare, que ha estat acusada de bruixeria. Us demana ajuda per netejar el seu nom i salvar-la.
