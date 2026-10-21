@@ -83,6 +83,23 @@ const schema = {
     margin-bottom: 1.5rem;
   }
 
+  .news-article__content :global(.video-embed) {
+    margin: 1rem 0 1.5rem;
+  }
+
+  .news-article__content :global(.video-embed iframe) {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    border-radius: 4px;
+  }
+
+  .news-article__content :global(.video-embed--short iframe) {
+    max-width: 315px;
+    aspect-ratio: 9 / 16;
+  }
+
   @media (max-width: 768px) {
     .news-article__top {
       flex-direction: column;
