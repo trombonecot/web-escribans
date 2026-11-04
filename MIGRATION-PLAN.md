@@ -276,7 +276,7 @@ export const ui = {
 
 ### Footer.astro
 - Social links row: Twitter, Instagram, Facebook
-- Contact email: escrivans@hipogeu.org
+- Contact email: escrivans.hipogeu@gmail.com
 - Copyright: "Escrivans de l'Hipogeu {year}"
 - Illustration credit: "Il·lustracions de Toni Ruiz"
 
@@ -338,7 +338,7 @@ export const ui = {
 ### 6.7 Contact (`/ca/contacte.astro`)
 - Page title
 - Invitation paragraph
-- Email link: escrivans@hipogeu.org
+- Email link: escrivans.hipogeu@gmail.com
 
 ---
 
